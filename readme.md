@@ -107,7 +107,7 @@ $p = 1 > 0.05 \implies$ exposure (drug) and outcome (AE occuring) is independent
 ## 코드 실행 방법
 
 1. Binder site 방문 (https://mybinder.org/):
-    - GitHub 선택 확인 후 입력: `https://github.com/sion23/OddsRatio`
-    - Git ref 입력: `main`
+    - GitHub 선택 확인 후 입력: `https://github.com/medisafepv/OddsRatio`
+    - Git ref 입력: `master`
 2. Launch (~1-5분 소유)
 3. 원하시는 cell을 선택 (click)하시고 실행 (`Shift` + `Enter`) 하세요
