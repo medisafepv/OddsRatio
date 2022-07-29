@@ -2,63 +2,37 @@
 
 Prospective Randomized study 
 
-![table1.png](table1.png)
+
+|   | 사례 발생 | 사례 미발생   | Total |
+|---|---|-----|-------|
+| 시험약 | $$n_{11} = 235$$ | $$n_{12} = 8400$$ | $$8635$$ |
+| 대조약 | $$n_{21} = 139$$ | $$n_{22} = 9300$$ | $$9311$$ |
 
 #### Sample Odds Ratio 
 
-$$\hat{\Theta} = \frac{n_{11}n_{22}}{n_{12}n_{21}} = \frac{(1)(379)}{(377)(1)} = 1.00531$$
+$$\hat{\Theta} = \frac{n_{11}n_{22}}{n_{12}n_{21}} = \frac{(235)(9300)}{(139)(8400)} = 1.87$$
 
-##### Interpretation
+**Interpretation**
 
-The estimated odds of AE occuring (사례발생) for someone taking 시험약 is 1.00531 times more likely of AE occuring for someone taking 대조약. Since $\hat{\Theta} \approx 1$, there is no association between exposure group (drug) vs. outcome (AE occuring).
+The estimated odds of 사례발생 for 시험약 is 1.87 times more likely than 사례발생 for 대조약.
 
-<div style="page-break-after: always;"></div>
 
 #### Hypothesis Testing: Likelihood Ratio Test
 
-If $\hat{\Theta} \gg 1$, then perform hypothesis test for statistical significance. 
+If $\hat{\Theta} \gg 1$ or $\hat{\Theta} \ll 1$ , then perform hypothesis test for statistical significance. 
 
-데이터 및 변수 입력 cell:
+Fix significance level $\alpha = 0.05$ and find the p-value `p`,
+* If `p` < $0.05$, conclude that 시험약 and 사례발생 are **not** independent (reject $H_{0}$)
+* If `p` ≥ $0.05$, conclude that 시험약 and 사례발생 are independent (fail to reject $H_{0}$)
 
+#### Confidence Interval
 
-```python
-import pandas as pd
+Note: Standard Error is from [Categorical Data Theory](https://stats.stackexchange.com/questions/266098/how-do-i-calculate-the-standard-deviation-of-the-log-odds).
 
-n_11 = 1
-n_12 = 377
-n_21 = 1
-n_22 = 379
+Fix significance level $\alpha = 0.05$ and find the confidence interval $(\text{LB}, \text{UB})$,
+* If $1 \notin (\text{LB}, \text{UB})$, conclude that 시험약 and 사례발생 are **not** independent (reject $H_{0}$)
+* If $1 \in (\text{LB}, \text{UB})$, conclude that 시험약 and 사례발생 are independent (fail to reject $H_{0}$)
 
-d = {"사례 발생" : [n_11, n_21], "사례 미발생" : [n_12, n_22]}
-data = pd.DataFrame(d, index=["시험약", "대조약"])
-
-data
-```
-
-Liklihood ratio test cell:
-
-
-```python
-from scipy.stats import fisher_exact
-
-oddsr, p = fisher_exact(data, alternative='two-sided')
-p
-```
-
-
-
-
-    1.0
-
-
-
-Using significance level $\alpha = 0.05$
-
-* If `p` < $0.05$, conclude that exposure (drug) and outcome (AE occuring) is **not** independent (reject $H_{0}$)
-* If `p` ≥ $0.05$, conclude that exposure (drug) and outcome (AE occuring) is independent (fail to reject $H_{0}$)
-
-Example:
-$p = 1 > 0.05 \implies$ exposure (drug) and outcome (AE occuring) is independent (i.e., no association)
 
 <div style="page-break-after: always;"></div>
 
